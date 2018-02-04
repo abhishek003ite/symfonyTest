@@ -1,4 +1,8 @@
-restAPI
-=======
+Rest API For Banking System
+===========================
 
-A Symfony project created on February 1, 2018, 5:07 am.
+A Symfony Rest API for Banking System where admin can create customers and create transactions.
+----------------------------------------------------------------------------------------------
+
+Instructions To Access The API:
+==============================
