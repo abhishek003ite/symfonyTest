@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+        <!-- Controllers -->
+        <service id="nelmio_api_doc.controller.swagger_ui" class="Nelmio\ApiDocBundle\Controller\SwaggerUiController" public="true">
+            <argument type="service" id="nelmio_api_doc.generator_locator" />
+            <argument type="service" id="twig" />
+        </service>
+
+        <service id="nelmio_api_doc.controller.swagger" class="Nelmio\ApiDocBundle\Controller\DocumentationController" public="true">
+            <argument type="service" id="nelmio_api_doc.generator_locator" />
+        </service>
+
+        <!-- Swagger Spec Generator -->
+        <service id="nelmio_api_doc.generator" alias="nelmio_api_doc.generator.default" public="true" />
+
+        <service id="nelmio_api_doc.controller_reflector" class="Nelmio\ApiDocBundle\Util\ControllerReflector" public="false">
+            <argument type="service" id="service_container" />
+            <argument type="service" id="controller_name_converter" />
+        </service>
+
+        <!-- Describers -->
+        <service id="nelmio_api_doc.describers.config" class="Nelmio\ApiDocBundle\Describer\ExternalDocDescriber" public="false">
+            <argument type="collection" />
+
+            <tag name="nelmio_api_doc.describer" priority="1000" />
+        </service>
+
+        <service id="nelmio_api_doc.describers.default" class="Nelmio\ApiDocBundle\Describer\DefaultDescriber" public="false">
+            <tag name="nelmio_api_doc.describer" priority="-1000" />
+        </service>
+
+        <!-- Routing Describers -->
+        <service id="nelmio_api_doc.route_describers.route_metadata" class="Nelmio\ApiDocBundle\RouteDescriber\RouteMetadataDescriber" public="false">
+            <tag name="nelmio_api_doc.route_describer" priority="-300" />
+        </service>
+
+        <!-- Model Describers -->
+        <service id="nelmio_api_doc.model_describers.object" class="Nelmio\ApiDocBundle\ModelDescriber\ObjectModelDescriber" public="false">
+            <argument type="service" id="property_info" />
+            <argument type="service" id="annotation_reader" />
+
+            <tag name="nelmio_api_doc.model_describer" />
+        </service>
+    </services>
+
+</container>
