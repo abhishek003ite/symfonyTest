@@ -12,3 +12,8 @@ Instructions To Access The API:
 4. You need to take complete backup because I have made some changes on bundles code.
 5. after running your server on port 8000 you can access the application on postman.
 6. Follow the API Doc attached.
+7. Create Database:
+    Set your credentials on parameters.yml file.
+    $>php bin/console doctrine:create:database
+    $>php bin/console doctrine:schema:update --force
+    
